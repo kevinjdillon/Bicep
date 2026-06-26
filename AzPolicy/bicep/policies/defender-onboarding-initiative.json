@@ -1,0 +1,193 @@
+{
+  "properties": {
+    "displayName": "Deploy Defender Onboarding Pre-requisites to Windows VMs using CSE and UAMI",
+    "policyType": "Custom",
+    "description": "Assigns a BYO User Assigned Managed Identity to the Windows Virtual Machine (used to access blob storage to retrieve the script), and deploys a Custom Script Extension that runs on the VM to configure Defender pre-requisites.",
+    "metadata": {
+      "category": "Compute",
+      "createdBy": "ea78ccd1-4b49-4305-9397-d8b8197ea48b",
+      "createdOn": "2026-06-24T20:18:23.9476855Z",
+      "updatedBy": null,
+      "updatedOn": null
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "Policy Effect": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "Policy Effect",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "Bring Your Own User-Assigned Identity": {
+        "type": "boolean",
+        "metadata": {
+          "description": "",
+          "displayName": "Bring Your Own User-Assigned Identity",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": true
+      },
+      "Restrict Bring Your Own User-Assigned Identity to Subscription": {
+        "type": "boolean",
+        "metadata": {
+          "description": "",
+          "displayName": "Restrict Bring Your Own User-Assigned Identity to Subscription",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": false
+      },
+      "User-Assigned Managed Identity Resource ID": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "User-Assigned Managed Identity Resource ID",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": ""
+      },
+      "Built-In-Identity-RG Location": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "Built-In-Identity-RG Location",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": "westus2"
+      },
+      "Command To Execute": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "Command To Execute",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": "powershell.exe -ExecutionPolicy Bypass -NoProfile -File Defender-Onboarding.ps1"
+      },
+      "User Assigned Managed Identity Client ID": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "User Assigned Managed Identity Client ID",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": ""
+      },
+      "Script URI": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "Script URI",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": ""
+      },
+      "Tag used for versioning and CSE compliance validation": {
+        "type": "string",
+        "metadata": {
+          "description": "",
+          "displayName": "Tag used for versioning and CSE compliance validation",
+          "portalReview": false,
+          "strongType": "",
+          "assignPermissions": false
+        },
+        "allowedValues": [],
+        "defaultValue": "DefenderOnboarding-v1"
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "[Preview]: Assign Built-In User-Assigned Managed Identity to Virtual Machines_1",
+        "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/d367bd60-64ca-4364-98ea-276775bddd94",
+        "definitionVersion": "1.1.*-preview",
+        "effectiveDefinitionVersion": "1.1.0-preview",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Policy Effect')]"
+          },
+          "bringYourOwnUserAssignedManagedIdentity": {
+            "value": "[parameters('Bring Your Own User-Assigned Identity')]"
+          },
+          "restrictBringYourOwnUserAssignedIdentityToSubscription": {
+            "value": "[parameters('Restrict Bring Your Own User-Assigned Identity to Subscription')]"
+          },
+          "userAssignedIdentityResourceId": {
+            "value": "[parameters('User-Assigned Managed Identity Resource ID')]"
+          },
+          "builtInIdentityResourceGroupLocation": {
+            "value": "[parameters('Built-In-Identity-RG Location')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Deploy Defender Onboarding Pre-requisites to Windows VMs using CSE_1",
+        "policyDefinitionId": "/subscriptions/fa7b0278-0659-4cc0-8909-9827c3bc3763/providers/microsoft.authorization/policydefinitions/0d89f4ac95584e8c80f49b22",
+        "definitionVersion": "1.0.*",
+        "effectiveDefinitionVersion": "1.0.0",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Policy Effect')]"
+          },
+          "commandToExecute": {
+            "value": "[parameters('Command To Execute')]"
+          },
+          "uamiClientId": {
+            "value": "[parameters('User Assigned Managed Identity Client ID')]"
+          },
+          "scriptUri": {
+            "value": "[parameters('Script URI')]"
+          },
+          "forceUpdateTag": {
+            "value": "[parameters('Tag used for versioning and CSE compliance validation')]"
+          }
+        },
+        "groupNames": []
+      }
+    ],
+    "policyDefinitionGroups": [],
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/subscriptions/fa7b0278-0659-4cc0-8909-9827c3bc3763/providers/Microsoft.Authorization/policySetDefinitions/29a990e0e9854ae49e655642",
+  "type": "Microsoft.Authorization/policySetDefinitions",
+  "name": "29a990e0e9854ae49e655642",
+  "systemData": {
+    "createdBy": "admin@MngEnvMCAP967846.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2026-06-24T20:18:23.8846749Z",
+    "lastModifiedBy": "admin@MngEnvMCAP967846.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2026-06-24T20:18:23.8846749Z"
+  }
+}

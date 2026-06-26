@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "managementGroupId": {
+      "value": "YOUR_MANAGEMENT_GROUP_ID",
+      "metadata": {
+        "description": "The management group ID where policies and initiative will be deployed"
+      }
+    },
+    "subscriptionId": {
+      "value": "YOUR_SUBSCRIPTION_ID",
+      "metadata": {
+        "description": "The subscription ID where the UAMI will be created"
+      }
+    },
+    "uamiResourceGroupName": {
+      "value": "rg-defender-onboarding",
+      "metadata": {
+        "description": "The name of the resource group where the UAMI will be deployed (will be created if it doesn't exist)"
+      }
+    },
+    "uamiLocation": {
+      "value": "westus2",
+      "metadata": {
+        "description": "Azure region where the UAMI resource will be deployed"
+      }
+    },
+    "uamiName": {
+      "value": "uami-w-operations-defender-cse",
+      "metadata": {
+        "description": "Name of the User-Assigned Managed Identity to be created"
+      }
+    },
+    "tags": {
+      "value": {
+        "Environment": "Production",
+        "ManagedBy": "Bicep",
+        "Purpose": "DefenderOnboarding"
+      },
+      "metadata": {
+        "description": "Tags to apply to all deployed resources"
+      }
+    },
+    "uamiPolicyName": {
+      "value": "policy-assign-uami-defender-onboarding",
+      "metadata": {
+        "description": "Name for the custom policy definition that assigns UAMI to VMs"
+      }
+    },
+    "csePolicyName": {
+      "value": "policy-cse-defender-onboarding",
+      "metadata": {
+        "description": "Name for the custom policy definition that deploys Custom Script Extension to VMs"
+      }
+    },
+    "initiativeName": {
+      "value": "initiative-defender-onboarding",
+      "metadata": {
+        "description": "Name for the policy initiative (set) that combines both policy definitions"
+      }
+    }
+  }
+}
