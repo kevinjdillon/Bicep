@@ -183,10 +183,6 @@
   "type": "Microsoft.Authorization/policyDefinitions",
   "name": "0d89f4ac95584e8c80f49b22",
   "systemData": {
-    "createdBy": "admin@MngEnvMCAP967846.onmicrosoft.com",
-    "createdByType": "User",
-    "createdAt": "2026-06-24T17:34:54.0911763Z",
-    "lastModifiedBy": "admin@MngEnvMCAP967846.onmicrosoft.com",
     "lastModifiedByType": "User",
     "lastModifiedAt": "2026-06-24T19:40:20.6155293Z"
   }
